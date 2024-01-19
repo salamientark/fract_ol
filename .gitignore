@@ -1,3 +1,6 @@
 *.o
 *.a
 README
+fract_ol
+miniLibX
+*.out
