@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:11 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/19 09:58:04 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:28:02 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ t_complex   c_pow2(t_complex c)
     return (c_pow);
 }
 
-t_complex   pos_to_complex(t_pos pos)
+t_complex   pos_to_complex(t_pos pos, t_param param)
 {
     t_complex   c;
     double      middle_line;
     double      middle_col;
+    double      final_zoom;
 
-    middle_line = 540;
-    middle_col = 960;
-    c.reel = ((double)pos.pos_y - pos.offset_y - middle_col) / middle_line;// * (pos.zoom + 1);
-    c.img = ((double)pos.pos_x - pos.offset_x - middle_line) / middle_line;// * (pos.zoom + 1);
+    middle_line = (double) param.ref.y;
+    middle_col = (double) param.ref.x;
+    final_zoom = middle_line * (param.zoom + 1);
+    c.reel = ((double)pos.y - param.offset.y - middle_col) / final_zoom;
+    c.img = ((double)pos.x - param.offset.x - middle_line) / final_zoom;
     return (c);
 }

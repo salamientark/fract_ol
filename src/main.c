@@ -6,39 +6,71 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:08:43 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/19 09:58:20 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:32:47 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 #include <stdio.h>
 
+t_img	init_image(t_env env)
+{
+	t_img image;
+
+	image.img = mlx_new_image(env.mlx, env.width, env.height);
+	if (!(image.img))
+		return (image);
+	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel,
+		&image.line_length, &image.endian);
+	if (!(image.addr))
+		return ((void)mlx_destroy_image(env.mlx, env.img.img), image);
+	return (image);
+}
+
+t_env	init_env(int max_iter, int (*fractal)(t_pos, t_env))
+{
+	t_env	env;
+
+	env.fractal = NULL;
+	env.mlx = mlx_init();
+	if (!(env.mlx))
+		return (env);
+	mlx_get_screen_size(env.mlx, &(env.width), &(env.height));
+	env.window = mlx_new_window(env.mlx, env.width, env.height, WINDOW_TITLE);
+	if (!(env.window))
+		return ((void)mlx_destroy_display(env.mlx), env);
+	env.img = init_image(env);
+	if (!(env.img.img) || !(env.img.addr))
+		return ((void)mlx_destroy_window(env.mlx, env.window),
+			(void)mlx_destroy_display(env.mlx), env);
+	env.param.max_iter = max_iter;
+	env.param.ref.x = env.width - (fmin(env.width, env.height) / 2);
+	env.param.ref.y = env.height - (fmin(env.width, env.height) / 2);
+	env.param.offset.x = 0;
+	env.param.offset.y = 0;
+	env.param.zoom = 0;
+	env.fractal = fractal;
+	return (env);
+}
+
+int	render(t_env *env)
+{
+	mlx_put_image_to_window(env->mlx, env->window, env->img.img, 0, 0);
+	return (1);
+}
+
 int main()
 {
-    void	*mlx;
-	void	*mlx_win;
 	t_env	env;
-	t_image	img;
 
-    
-
-	mlx = mlx_init();
-    // if (mlx == (void *)0)
-        // return (0);
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-
-	env.max_iter = 65;
-	env.pos.pos_x = 0;
-	env.pos.pos_y = 0;
-	env.pos.offset_x = 0;
-	env.pos.offset_y = 400;
-	env.pos.zoom = 0;
-    draw_fract_ol(&img, env, &mandelbrot, &purlple_palet);
-
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	env = init_env(50, &mandelbrot);
+	if (!env.fractal)
+		return (0);
+    draw_fract_ol(env, &purlple_palet);
+	mlx_put_image_to_window(env.mlx, env.window, env.img.img, 0, 0);
+	
+	mlx_loop_hook(env.mlx, &render, &env);
+	mlx_key_hook(env.window, &handle_key_hook, &env);
+	mlx_loop(env.mlx);
     return (0);
 }

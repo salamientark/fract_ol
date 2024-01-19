@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mlx.c                                           :+:      :+:    :+:   */
+/*   ft_keycode.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 21:26:09 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/19 17:31:20 by dbaladro         ###   ########.fr       */
+/*   Created: 2024/01/19 14:13:37 by dbaladro          #+#    #+#             */
+/*   Updated: 2024/01/19 14:16:33 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#ifndef FT_KEYCODE_H
+# define FT_KEYCODE_H
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char	*dst;
+// KEYCODE MACRO
+# define ESC 0xFF1B
+# define ARROW_UP  0xFF52
+# define ARROW_DOWN 0xFF54
+# define ARROW_LEFT 0xFF51
+# define ARROW_RIGHT 0xFF53
 
-	dst = data->addr + (x * data->line_length + y * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
+#endif
