@@ -25,7 +25,7 @@ TOOLS_FILE = $(TOOLS_DIR)/print_fract_ol.c
 # 			 ft_lstmap.c
 
 ### HEADER FILE ###
-HEADER_DIR = ./libft/includes ./includes
+HEADER_DIR = includes
 
 # MNIILIBX
 MLX_DIR = miniLibX
@@ -57,7 +57,7 @@ $(PROJECT) : $(OBJ_SRC) $(OBJ_TOOLS)
 
 $(SRC_DIR)/$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) -g3 $(CFLAGS) -I $(FT_DIR) $(HEADER_DIR)  -c $< -o $@ $(FT_FLAG)
+	$(CC) -g3 $(CFLAGS) -I ./$(HEADER_DIR)  -c $< -o $@
 
 # bonus : $(OBJ_BONUS)
 # 	make -C $(FT_DIR)

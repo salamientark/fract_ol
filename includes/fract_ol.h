@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:59 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/19 17:03:51 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/19 23:14:12 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,9 @@ t_complex       pos_to_complex(t_pos pos, t_param param);
     | _||   / / _ \ (__  | ||___| (_) | |__ 
     |_| |_|_\/_/ \_\___| |_|     \___/|____|
 */
+void            exit_fractol(t_env *env);
 int             mandelbrot(t_pos position, t_env env);
-void            draw_fract_ol(t_env env, int (*color)(double, double));
+void            draw_fract_ol(t_env *env, int (*color)(double, double));
 
 /*
     HOOK
