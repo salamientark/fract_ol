@@ -6,34 +6,33 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:29:22 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/19 08:31:22 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/20 08:54:37 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-int make_color(int t, int r, int g, int b)
+int	make_color(int t, int r, int g, int b)
 {
-    return (t << 24 | r << 16 | g << 8 | b);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 // int add_shade(double iter, double max_iter)
 // {
-//     return ((iter / max_iter) * 255);
+//	 return ((iter / max_iter) * 255);
 // }
 
-int purlple_palet(double iter, double max_iter)
+int	purlple_palet(double iter, double max_iter)
 {
-    int red;
-    int blue;
-    int green;
-    double  tmp;
+	int		red;
+	int		blue;
+	int		green;
+	double	tmp;
 
-    red = rescale(0, max_iter, 0, 255, max_iter - iter);
-    tmp = (double)ft_abs(cos(iter / max_iter - M_PI) - 1) / 2;
-    blue = (rescale(0, max_iter, 0, 255, tmp * max_iter));
-    tmp = (double)(sin((-iter) / max_iter));
-    green = (rescale(0, max_iter, 0, 255, (tmp * tmp) / max_iter));
-    return (make_color(0, red, green, blue));
+	red = rescale(0, max_iter, 0, 255, max_iter - iter);
+	tmp = (double)ft_abs(cos(iter / max_iter - M_PI) - 1) / 2;
+	blue = (rescale(0, max_iter, 0, 255, tmp * max_iter));
+	tmp = (double)(sin((-iter) / max_iter));
+	green = (rescale(0, max_iter, 0, 255, (tmp * tmp) / max_iter));
+	return (make_color(0, red, green, blue));
 }
-
