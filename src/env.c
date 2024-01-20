@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 08:12:54 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 22:03:41 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:54:13 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_env	*init_env(int ac, char **av)
 			free(env), NULL);
 	env->param.ref.x = env->width / 2;
 	env->param.ref.y = env->height / 2;
-	env->param.offset.y = ft_abs((env->height - (fmax(env->height, env->width) / 2)
-		- (env->height / 2)) * (env->fractal == &mandelbrot));
+	env->param.offset.y = ft_abs((env->height - (fmax(env->height, env->width)
+					/ 2) - (env->height / 2)) * (env->fractal == &mandelbrot));
 	env->param.offset.x = 0;
 	env->param.zoom = 1;
 	return (env);

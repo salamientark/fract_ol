@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:59 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 21:21:03 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:44:34 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_env
 */
 void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
-/*	___ ___  _	___  ___  ___ 
+/*	  ___ ___  _	___  ___  ___ 
 	 / __/ _ \| |  / _ \| _ \/ __|
 	| (_| (_) | |_| (_) |   /\__ \
 	 \___\___/|____\___/|_|_\|___/ 
@@ -139,5 +139,6 @@ void			draw_fract_ol(t_env *env, int (*color)(double, double));
 */
 int				render(t_env *env);
 int				handle_key_hook(int keycode, void *param);
+int				handle_mouse_hook(int button, int x, int y, void *param);
 
 #endif

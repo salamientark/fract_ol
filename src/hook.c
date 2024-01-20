@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:49:27 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 22:00:46 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:56:30 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,33 @@ int	handle_key_hook(int keycode, void *param)
 		env_cp->param.offset.x += 40;
 	else if (keycode == ARROW_DOWN)
 		env_cp->param.offset.x -= 40;
-    else if(keycode == V)
-        env_cp->param.zoom *= 1.1;
-    else if (keycode == C)
-        env_cp->param.zoom *= 0.9;
+	else if (keycode == V)
+		env_cp->param.zoom *= 1.1;
+	else if (keycode == C)
+		env_cp->param.zoom *= 0.9;
 	else if (keycode == ESC)
 		exit_fractol(env_cp);
 	else
 		return (ft_printf("%d\n", keycode));
+	return (0);
+}
+
+/*
+	Hook mouse
+*/
+int	handle_mouse_hook(int button, int x, int y, void *param)
+{
+	t_env	*env;
+
+	(void) x;
+	(void) y;
+	env = (t_env *)param;
+	if (button == MOUSE_SCROLL_UP)
+		env->param.zoom *= 1.1;
+	else if (button == MOUSE_SCROLL_DOWN)
+		env->param.zoom *= 0.9;
+	else
+		return (ft_printf("%#X\n", button));
 	return (0);
 }
 

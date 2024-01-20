@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:23:39 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 08:58:32 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/20 22:55:11 by madlab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ unsigned int	ft_abs(int n)
 
 int	rescale(int old_min, int old_max, int new_min, int new_max, double value)
 {
-	double  tmp_val;
+	double	tmp_val;
 
 	tmp_val = value / (double)(old_max - old_min);
 	tmp_val *= (new_max - new_min);

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:13:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 09:24:48 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:48:50 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # define ARROW_RIGHT 0xFF53
 
 # define V 0x0076
-# define C 0x003D
+# define C 0x0063
+
+# define MOUSE_SCROLL_UP 0x0004
+# define MOUSE_SCROLL_DOWN 0x0005
 
 #endif
