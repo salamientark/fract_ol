@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 14:13:24 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 22:52:16 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/20 23:01:06 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	set_fractal_function(t_env *env, const char *s)
 		env->param.ref.y = env->height / 2;
 	}
 	else if ((ft_strlen(s) == 1 && s[0] == 'J') || ft_strcmp(s, "Julia") == 0)
+	{
+		env->fractal_arg = init_complex(-0.8, 0.156);
 		env->fractal = &julia;
+	}
 	else
 		env->fractal = NULL;
 }
