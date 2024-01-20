@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_env.c                                      :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 08:12:54 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 08:57:52 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/20 22:03:41 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 /*
 	Init fract_ol env variable
 */
-t_env	*init_env(int max_iter, int (*fractal)(t_pos, t_env))
+t_env	*init_env(int ac, char **av)
 {
 	t_env	*env;
 
 	env = (t_env *)malloc(sizeof(struct s_env));
 	if (!env)
 		return (NULL);
+	env->param.max_iter = 50;
+	parse_arg(env, ac, av);
+	if (!(env->fractal))
+		return (free(env), NULL);
 	env->mlx = mlx_init();
 	if (!(env->mlx))
 		return (NULL);
@@ -31,13 +35,12 @@ t_env	*init_env(int max_iter, int (*fractal)(t_pos, t_env))
 	if (!(env->window))
 		return ((void)mlx_destroy_display(env->mlx), free(env->mlx),
 			free(env), NULL);
-	env->param.max_iter = max_iter;
-	env->param.ref.x = env->width - (fmin(env->width, env->height) / 2);
-	env->param.ref.y = env->height - (fmin(env->width, env->height) / 2);
+	env->param.ref.x = env->width / 2;
+	env->param.ref.y = env->height / 2;
+	env->param.offset.y = ft_abs((env->height - (fmax(env->height, env->width) / 2)
+		- (env->height / 2)) * (env->fractal == &mandelbrot));
 	env->param.offset.x = 0;
-	env->param.offset.y = 0;
-	env->param.zoom = 0;
-	env->fractal = fractal;
+	env->param.zoom = 1;
 	return (env);
 }
 

@@ -1,26 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_keycode.h                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 14:13:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 09:24:48 by dbaladro         ###   ########.fr       */
+/*   Created: 2024/01/20 19:13:16 by dbaladro          #+#    #+#             */
+/*   Updated: 2024/01/20 19:13:26 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_KEYCODE_H
-# define FT_KEYCODE_H
+#include "../includes/fract_ol.h"
 
-// KEYCODE MACRO
-# define ESC 0xFF1B
-# define ARROW_UP  0xFF52
-# define ARROW_DOWN 0xFF54
-# define ARROW_LEFT 0xFF51
-# define ARROW_RIGHT 0xFF53
-
-# define V 0x0076
-# define C 0x003D
-
-#endif

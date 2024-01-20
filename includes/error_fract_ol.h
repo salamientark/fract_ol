@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_keycode.h                                       :+:      :+:    :+:   */
+/*   error_fract_ol.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 14:13:37 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 09:24:48 by dbaladro         ###   ########.fr       */
+/*   Created: 2024/01/20 19:14:11 by dbaladro          #+#    #+#             */
+/*   Updated: 2024/01/20 19:45:45 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_KEYCODE_H
-# define FT_KEYCODE_H
+#ifndef ERROR_FRACT_OL_H
+# define ERROR_FRACT_OL_H
 
-// KEYCODE MACRO
-# define ESC 0xFF1B
-# define ARROW_UP  0xFF52
-# define ARROW_DOWN 0xFF54
-# define ARROW_LEFT 0xFF51
-# define ARROW_RIGHT 0xFF53
+# include <string.h>
 
-# define V 0x0076
-# define C 0x003D
+# define FRACTOL_OPT "usage: fract_ol [fractal] *[max_iteration] [complex]*\n\
+ fractal:\n\
+--> M Mandelbrot\n\
+--> J Julia\n\
+ max_iteration\n\
+--> (int) > 10\n\
+ complex\n\
+--> (double,double)\n"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:09:26 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 08:57:17 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/20 21:17:44 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	Mandelbrot Formula
 */
-int	mandelbrot(t_pos position, t_env env)
+int	mandelbrot(t_pos position, t_env *env)
 {
 	t_complex	z;
 	t_complex	c;
@@ -24,9 +24,31 @@ int	mandelbrot(t_pos position, t_env env)
 
 	z.reel = 0;
 	z.img = 0;
-	c = pos_to_complex(position, env.param);
+	c = pos_to_complex(position, env->param);
 	iter = 0;
-	max_iteration = env.param.max_iter;
+	max_iteration = env->param.max_iter;
+	while (modul_sum(z) < 4 && iter < max_iteration)
+	{
+		z = c_add(c_pow2(z), c);
+		iter++;
+	}
+	return (iter);
+}
+
+/*
+	Julia Formula
+*/
+int	julia(t_pos position, t_env *env)
+{
+	t_complex	z;
+	t_complex	c;
+	int			iter;
+	int			max_iteration;
+
+	z = pos_to_complex(position, env->param);
+	c = env->fractal_arg;
+	iter = 0;
+	max_iteration = env->param.max_iter;
 	while (modul_sum(z) < 4 && iter < max_iteration)
 	{
 		z = c_add(c_pow2(z), c);
@@ -49,7 +71,7 @@ void	draw_fract_ol(t_env *env, int (*color)(double, double))
 		pos.y = 0;
 		while (pos.y < env->width)
 		{
-			iter = env->fractal(pos, *env);
+			iter = env->fractal(pos, env);
 			if (iter == env->param.max_iter)
 				my_mlx_pixel_put(&(env->img), pos.x, pos.y, 0x00000000);
 			else

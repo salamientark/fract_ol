@@ -7,9 +7,11 @@ PROJECT = fract_ol
 PROJECT_DIR = ./
 
 SRC_DIR = src
-SRC_FILE = $(SRC_DIR)/ft_math.c $(SRC_DIR)/complex.c \
-			$(SRC_DIR)/colors.c $(SRC_DIR)/fract_ol.c \
-			$(SRC_DIR)/ft_mlx.c $(SRC_DIR)/hook.c $(SRC_DIR)/fractol_env.c $(SRC_DIR)/main.c
+SRC_FILE = $(SRC_DIR)/ft_math.c $(SRC_DIR)/complex.c $(SRC_DIR)/ft_str_to_double.c \
+			$(SRC_DIR)/colors.c $(SRC_DIR)/ft_mlx.c \
+			$(SRC_DIR)/arg_setter.c $(SRC_DIR)/arg_parser.c \
+			$(SRC_DIR)/hook.c $(SRC_DIR)/env.c	$(SRC_DIR)/fract_ol.c \
+			$(SRC_DIR)/main.c
 			   
 			  
 

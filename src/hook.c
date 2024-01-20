@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:49:27 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 08:59:47 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/20 22:00:46 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@ int	handle_key_hook(int keycode, void *param)
 
 	env_cp = (t_env *)param;
 	if (keycode == ARROW_RIGHT)
-		env_cp->param.offset.y -= 10;
+		env_cp->param.offset.y -= 90;
 	else if (keycode == ARROW_LEFT)
-		env_cp->param.offset.y += 10;
+		env_cp->param.offset.y += 90;
 	else if (keycode == ARROW_UP)
-		env_cp->param.offset.x += 10;
+		env_cp->param.offset.x += 40;
 	else if (keycode == ARROW_DOWN)
-		env_cp->param.offset.x -= 10;
+		env_cp->param.offset.x -= 40;
+    else if(keycode == V)
+        env_cp->param.zoom *= 1.1;
+    else if (keycode == C)
+        env_cp->param.zoom *= 0.9;
 	else if (keycode == ESC)
 		exit_fractol(env_cp);
 	else

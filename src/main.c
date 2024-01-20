@@ -6,17 +6,19 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:08:43 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 09:00:22 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/20 19:01:03 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
+#include <stdio.h>
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_env	*env;
+	(void)	ac;
 
-	env = init_env(50, &mandelbrot);
+	env = init_env(ac, av);
 	if (!env)
 		return (0);
 	mlx_loop_hook(env->mlx, &render, env);
