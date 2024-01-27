@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 09:49:46 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 22:57:29 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/27 22:21:20 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ static int	add_arg(t_env *env, const char *arg, int pos)
 	}
 	if (pos == 2)
 	{
-		if (env->fractal != &mandelbrot)
-			env->fractal_arg = set_complex_param(arg);
+		if (env->fractal == &mandelbrot)
+			return (0);
+		env->fractal_arg = set_complex_param(arg);
 		return (1);
 	}
 	return (0);
@@ -94,7 +95,7 @@ void	parse_arg(t_env *env, int ac, char **av)
 
 	env->fractal = NULL;
 	if (ac <= 1 || ac > 4)
-		return ;
+		return ((void)ft_printf(FRACTOL_OPT));
 	if (ac == 2)
 	{
 		arg = split_arg(&size, av[1]);

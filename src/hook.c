@@ -6,10 +6,11 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:49:27 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 22:56:30 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/27 20:18:47 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../includes/fract_ol.h"
 
 /*
@@ -21,21 +22,28 @@ int	handle_key_hook(int keycode, void *param)
 
 	env_cp = (t_env *)param;
 	if (keycode == ARROW_RIGHT)
-		env_cp->param.offset.y -= 90;
+		env_cp->param.ref.x += (20 * env_cp->param.step);
 	else if (keycode == ARROW_LEFT)
-		env_cp->param.offset.y += 90;
+		env_cp->param.ref.x -= (20 * env_cp->param.step);
 	else if (keycode == ARROW_UP)
-		env_cp->param.offset.x += 40;
+		env_cp->param.ref.y -= (20 * env_cp->param.step);
 	else if (keycode == ARROW_DOWN)
-		env_cp->param.offset.x -= 40;
+		env_cp->param.ref.y += (20 * env_cp->param.step);
 	else if (keycode == V)
-		env_cp->param.zoom *= 1.1;
+	{
+		env_cp->param.step *= 0.9;
+		env_cp->param.step *= 0.9;
+	}
 	else if (keycode == C)
-		env_cp->param.zoom *= 0.9;
+	{
+		env_cp->param.step *= 1.1;
+		env_cp->param.step *= 1.1;
+	}
 	else if (keycode == ESC)
 		exit_fractol(env_cp);
 	else
 		return (ft_printf("%d\n", keycode));
+	// env_cp->param.step /= env_cp->param.zoom;
 	return (0);
 }
 
@@ -48,11 +56,20 @@ int	handle_mouse_hook(int button, int x, int y, void *param)
 
 	(void) x;
 	(void) y;
+	(void) button;
 	env = (t_env *)param;
 	if (button == MOUSE_SCROLL_UP)
-		env->param.zoom *= 1.1;
+	{
+		env->param.ref.x += ((-(env->width / 2) + x) * env->param.step * 0.1);
+		env->param.ref.y += ((-(env->height / 2) + y) * env->param.step * 0.1);
+		env->param.step /= 1.1;
+	}
 	else if (button == MOUSE_SCROLL_DOWN)
-		env->param.zoom *= 0.9;
+	{
+		env->param.ref.x += ((-(env->width / 2) + x) * env->param.step * 0.1);
+		env->param.ref.y += ((-(env->height / 2) + y) * env->param.step * 0.1);
+		env->param.step *= 1.1;
+	}
 	else
 		return (ft_printf("%#X\n", button));
 	return (0);

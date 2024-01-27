@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:59 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 22:44:34 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:13:32 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_img
 */
 typedef struct s_pos
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }				t_pos;
 
 /*
@@ -58,8 +58,8 @@ typedef struct s_param
 {
 	int		max_iter;
 	double	zoom;
+	double	step;
 	t_pos	ref;
-	t_pos	offset;
 }				t_param;
 
 /*
