@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:59 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 10:47:56 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:42:33 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "../miniLibX/mlx.h"
 # include "../libft/includes/libft.h"
 # include "ft_keycode.h"
-# include "ft_math.h"
 # include "error_fract_ol.h"
+# include <math.h>
 
 # ifndef M_PI
 #  define M_PI 3.141592653589793
@@ -26,6 +26,15 @@
 # define WINDOW_TITLE "Fract_ol"
 # define MAX_ITER_DOWN_LIMIT 10.
 # define MAX_ITER_UP_LIMIT 250.
+
+/*
+	Complex numbers
+*/
+typedef struct s_complex
+{
+	double	reel;
+	double	img;
+}				t_complex;
 
 /*
 	Data to write to image:
@@ -91,8 +100,8 @@ void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 	| (_| (_) | |_| (_) |   /\__ \
 	 \___\___/|____\___/|_|_\|___/ 
 */
-int				make_color(int t, int r, int g, int b);
 int				purlple_palet(double iter, double max_iter);
+int				multicolor_palet(double iter, double max_iter);
 
 /*   ___ _____	__  __   _ _____ _  _ 
 	| __|_   _|__|  \/  | /_\_   _| || |
@@ -101,18 +110,8 @@ int				purlple_palet(double iter, double max_iter);
 */
 // math.c
 double			ft_abs(double n);
-int				rescale(int old_min, int old_max, int new_min, int new_max,
-					double value);
-
-// ft_str_to_double.c
 double			ft_str_to_double(char *str);
-
-// complex.c
-double			modul_sum(t_complex c);
 t_complex		init_complex(double reel, double imaginary);
-t_complex		c_add(t_complex c1, t_complex c2);
-t_complex		c_pow2(t_complex c);
-t_complex		pos_to_complex(t_pos pos, t_param param);
 
 /*   ___ ___	_   ___ _____	 ___  _	
 	| __| _ \  /_\ / __|_   _|__ / _ \| |   
@@ -122,6 +121,7 @@ t_complex		pos_to_complex(t_pos pos, t_param param);
 // === ARG_GETTER ===
 void			set_fractal_function(t_env *env, const char *s);
 t_complex		set_complex_param(const char *s);
+
 // === ARG_PARSER ===
 void			parse_arg(t_env *env, int ac, char **av);
 

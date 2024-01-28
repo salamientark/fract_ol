@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:23:39 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 10:55:38 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:40:10 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,4 @@ t_complex	init_complex(double reel, double imaginary)
 	c.reel = reel;
 	c.img = imaginary;
 	return (c);
-}
-
-int	rescale(int old_min, int old_max, int new_min, int new_max, double value)
-{
-	double	tmp_val;
-
-	tmp_val = value / (double)(old_max - old_min);
-	tmp_val *= (new_max - new_min);
-	return ((int)round(tmp_val));
 }
