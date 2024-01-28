@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:59 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 07:30:22 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 10:47:56 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 # endif
 
 # define WINDOW_TITLE "Fract_ol"
+# define MAX_ITER_DOWN_LIMIT 10.
+# define MAX_ITER_UP_LIMIT 250.
 
 /*
-	Datato write to image:
+	Data to write to image:
 	img:
 	addr: img starting addr ?
 	bits_per_pixel:?
@@ -56,7 +58,7 @@ typedef struct s_t_pos
 */
 typedef struct s_param
 {
-	int		max_iter;
+	double	max_iter;
 	double	step;
 	t_pos	ref;
 }				t_param;
@@ -75,7 +77,6 @@ typedef struct s_env
 	void		(*fractal)(struct s_env *, int (*color)(double, double));
 	t_complex	fractal_arg;
 	int			(*color)(double, double);
-	int			changed;
 }				t_env;
 
 /*   __  __ _   __  __
@@ -99,7 +100,7 @@ int				purlple_palet(double iter, double max_iter);
 	|_|   |_|	|_|  |_/_/ \_\_| |_||_|
 */
 // math.c
-unsigned int	ft_abs(int n);
+double			ft_abs(double n);
 int				rescale(int old_min, int old_max, int new_min, int new_max,
 					double value);
 
@@ -131,6 +132,7 @@ void			exit_fractol(t_env *env);
 // fract_ol.c
 void			julia(t_env *env, int (*color)(double, double));
 void			mandelbrot(t_env *env, int (*color)(double, double));
+void			burning_ship(t_env *env, int (*color)(double, double));
 
 /*   _  _  ___   ___  _  __
 	| || |/ _ \ / _ \| |/ /

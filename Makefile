@@ -7,7 +7,7 @@ PROJECT = fract_ol
 PROJECT_DIR = ./
 
 SRC_DIR = src
-SRC_FILE = $(SRC_DIR)/ft_math.c $(SRC_DIR)/complex.c $(SRC_DIR)/ft_str_to_double.c \
+SRC_FILE = $(SRC_DIR)/ft_math.c \
 			$(SRC_DIR)/colors.c $(SRC_DIR)/ft_mlx.c \
 			$(SRC_DIR)/arg_setter.c $(SRC_DIR)/arg_parser.c \
 			$(SRC_DIR)/hook.c $(SRC_DIR)/env.c	$(SRC_DIR)/fract_ol.c \
@@ -21,10 +21,6 @@ BONUS_FILE =
 # Development tools -> printing stuff
 TOOLS_DIR = tools
 TOOLS_FILE = $(TOOLS_DIR)/print_fract_ol.c
-
-# BONUS_FILE = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-# 			 ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-# 			 ft_lstmap.c
 
 ### HEADER FILE ###
 HEADER_DIR = includes

@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 08:12:54 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 07:33:45 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 10:48:54 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_env	*init_fract_ol(int ac, char **av)
 	env->param.ref.x = 0.;
 	env->param.ref.y = 0.;
 	env->color = &purlple_palet;
-	env->changed = 1;
 	return (env);
 }
 

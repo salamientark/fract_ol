@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:29:22 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 08:54:37 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/28 10:54:10 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ int	make_color(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
-
-// int add_shade(double iter, double max_iter)
-// {
-//	 return ((iter / max_iter) * 255);
-// }
 
 int	purlple_palet(double iter, double max_iter)
 {

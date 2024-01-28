@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:49:27 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 07:43:15 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:02:44 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,46 @@ int	handle_key_hook(int keycode, void *param)
 	env_cp = (t_env *)param;
 	if (keycode == ARROW_RIGHT)
 		env_cp->param.ref.x += (20 * env_cp->param.step);
-	else if (keycode == ARROW_LEFT)
+	if (keycode == ARROW_LEFT)
 		env_cp->param.ref.x -= (20 * env_cp->param.step);
-	else if (keycode == ARROW_UP)
+	if (keycode == ARROW_UP)
 		env_cp->param.ref.y -= (20 * env_cp->param.step);
-	else if (keycode == ARROW_DOWN)
+	if (keycode == ARROW_DOWN)
 		env_cp->param.ref.y += (20 * env_cp->param.step);
-	else if (keycode == V)
+	if (keycode == V)
 	{
 		env_cp->param.step *= 0.9;
 		env_cp->param.step *= 0.9;
 	}
-	else if (keycode == C)
+	if (keycode == C)
 	{
 		env_cp->param.step *= 1.1;
 		env_cp->param.step *= 1.1;
 	}
-	else if (keycode == ESC)
+	if (keycode == ESC)
 		exit_fractol(env_cp);
-	else
-		return (ft_printf("%d\n", keycode));
-	env_cp->changed = 1;
 	return (0);
+}
+
+void	zoom(t_env *env, int x, int y, double zoom)
+{
+	double	max_iter;
+	double	step;
+
+	max_iter = env->param.max_iter;
+	step = env->param.step;
+	env->param.ref.x += ((-(env->width / 2) + x) * step * 0.1);
+	env->param.ref.y += ((-(env->height / 2) + y) * step * 0.1);
+	if (zoom > 1.0)
+		max_iter = fmin(MAX_ITER_UP_LIMIT, max_iter + 1);
+	else
+		max_iter = fmax(MAX_ITER_DOWN_LIMIT, max_iter - 1);
+	if (max_iter < 10)
+		max_iter = 10;
+	env->param.max_iter = max_iter;
+	step /= zoom;
+	env->param.max_iter = max_iter;
+	env->param.step = step;
 }
 
 /*
@@ -54,25 +72,12 @@ int	handle_mouse_hook(int button, int x, int y, void *param)
 {
 	t_env	*env;
 
-	(void) x;
-	(void) y;
-	(void) button;
 	env = (t_env *)param;
 	if (button == MOUSE_SCROLL_UP)
-	{
-		env->param.ref.x += ((-(env->width / 2) + x) * env->param.step * 0.1);
-		env->param.ref.y += ((-(env->height / 2) + y) * env->param.step * 0.1);
-		env->param.step /= 1.1;
-	}
-	else if (button == MOUSE_SCROLL_DOWN)
-	{
-		env->param.ref.x += ((-(env->width / 2) + x) * env->param.step * 0.1);
-		env->param.ref.y += ((-(env->height / 2) + y) * env->param.step * 0.1);
-		env->param.step *= 1.1;
-	}
-	else
-		return (ft_printf("%#X\n", button));
-	env->changed = 1;
+		zoom(env, x, y, 1.1);
+	if (button == MOUSE_SCROLL_DOWN)
+		zoom(env, x, y, 0.9);
+	printf("max_iter = %f\n", env->param.max_iter);
 	return (0);
 }
 
@@ -81,8 +86,6 @@ int	handle_mouse_hook(int button, int x, int y, void *param)
 */
 int	render(t_env *env)
 {
-	if (!env->changed)
-		return (1);
 	env->img.img = mlx_new_image(env->mlx, env->width, env->height);
 	if (!(env->img.img))
 		exit_fractol(env);
@@ -96,6 +99,5 @@ int	render(t_env *env)
 	env->fractal(env, env->color);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.img, 0, 0);
 	mlx_destroy_image(env->mlx, env->img.img);
-	env->changed = 0;
 	return (1);
 }
