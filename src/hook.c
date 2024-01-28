@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:49:27 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/27 20:18:47 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 07:43:15 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	handle_key_hook(int keycode, void *param)
 		exit_fractol(env_cp);
 	else
 		return (ft_printf("%d\n", keycode));
-	// env_cp->param.step /= env_cp->param.zoom;
+	env_cp->changed = 1;
 	return (0);
 }
 
@@ -72,6 +72,7 @@ int	handle_mouse_hook(int button, int x, int y, void *param)
 	}
 	else
 		return (ft_printf("%#X\n", button));
+	env->changed = 1;
 	return (0);
 }
 
@@ -80,6 +81,8 @@ int	handle_mouse_hook(int button, int x, int y, void *param)
 */
 int	render(t_env *env)
 {
+	if (!env->changed)
+		return (1);
 	env->img.img = mlx_new_image(env->mlx, env->width, env->height);
 	if (!(env->img.img))
 		exit_fractol(env);
@@ -90,8 +93,9 @@ int	render(t_env *env)
 		(void)mlx_destroy_image(env->mlx, env->img.img);
 		exit_fractol(env);
 	}
-	draw_fract_ol(env, &purlple_palet);
+	env->fractal(env, env->color);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.img, 0, 0);
 	mlx_destroy_image(env->mlx, env->img.img);
+	env->changed = 0;
 	return (1);
 }

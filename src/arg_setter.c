@@ -6,13 +6,13 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 14:13:24 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 23:01:06 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 08:19:13 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-void	free_split(char ***split_ptr)
+static void	free_split(char ***split_ptr)
 {
 	char	**split_cp;
 	int		index;
@@ -37,12 +37,10 @@ void	set_fractal_function(t_env *env, const char *s)
 	if ((ft_strlen(s) == 1 && s[0] == 'M') || ft_strcmp(s, "Mandelbrot") == 0)
 	{
 		env->fractal = &mandelbrot;
-		env->param.ref.x = env->width / 2;
-		env->param.ref.y = env->height / 2;
 	}
 	else if ((ft_strlen(s) == 1 && s[0] == 'J') || ft_strcmp(s, "Julia") == 0)
 	{
-		env->fractal_arg = init_complex(-0.8, 0.156);
+		env->fractal_arg = init_complex(0.3, 0.5);
 		env->fractal = &julia;
 	}
 	else
@@ -71,7 +69,7 @@ static int	is_double_valid(const char *s)
 	s++;
 	while (*s && (ft_isdigit(*s)))
 		s++;
-	return (!(*s) && ft_isdigit(*(s - 1)));
+	return (!(*s) && (ft_isdigit(*(s - 1)) || *(s - 1) == '.'));
 }
 
 /*
@@ -82,12 +80,12 @@ t_complex	set_complex_param(const char *s)
 	char		**nbr;
 	t_complex	c;
 
-	c.reel = 0;
-	c.img = 0;
+	c.reel = 2;
+	c.img = 2;
 	nbr = ft_split(s, ',');
 	if (!nbr)
 		return (c);
-	if (!nbr[0] || !is_double_valid(nbr[0])
+	if (!nbr[0] || !nbr[1] || !is_double_valid(nbr[0])
 		|| (nbr[1] && !is_double_valid(nbr[1])) || nbr[2])
 		return (free_split(&nbr), c);
 	c.reel = ft_str_to_double(nbr[0]);

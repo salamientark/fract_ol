@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:08:43 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/20 22:56:55 by madlab           ###   ########.fr       */
+/*   Updated: 2024/01/27 22:33:52 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 {
 	t_env	*env;
 
-	env = init_env(ac, av);
+	env = init_fract_ol(ac, av);
 	if (!env)
 		return (0);
 	mlx_loop_hook(env->mlx, &render, env);

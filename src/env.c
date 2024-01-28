@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 08:12:54 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/27 22:04:16 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 07:33:45 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	Init fract_ol env variable
 */
-t_env	*init_env(int ac, char **av)
+t_env	*init_fract_ol(int ac, char **av)
 {
 	t_env	*env;
 
@@ -38,7 +38,8 @@ t_env	*init_env(int ac, char **av)
 	env->param.step = 1. / (fmin(env->height, env->width) / 2.);
 	env->param.ref.x = 0.;
 	env->param.ref.y = 0.;
-	env->param.zoom = 1;
+	env->color = &purlple_palet;
+	env->changed = 1;
 	return (env);
 }
 

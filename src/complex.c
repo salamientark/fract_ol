@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:11 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/27 20:14:18 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 07:16:24 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_complex	pos_to_complex(t_pos pos, t_param param)
 
 	middle_line = (double) param.ref.y;
 	middle_col = (double) param.ref.x;
-	final_zoom = middle_line * param.zoom;
+	final_zoom = middle_line;
 	c.reel = ((double)pos.y - (double)param.ref.y - middle_col) / final_zoom;
 	c.img = ((double)pos.x - (double)param.ref.x - middle_line) / final_zoom;
 	return (c);

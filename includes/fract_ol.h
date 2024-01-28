@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:59 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/27 19:13:32 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 07:30:22 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_img
 /*
 	Position (REAL POSITIVE NUMBERS)
 */
-typedef struct s_pos
+typedef struct s_t_pos
 {
 	double	x;
 	double	y;
@@ -57,7 +57,6 @@ typedef struct s_pos
 typedef struct s_param
 {
 	int		max_iter;
-	double	zoom;
 	double	step;
 	t_pos	ref;
 }				t_param;
@@ -73,8 +72,10 @@ typedef struct s_env
 	int			height;
 	t_img		img;
 	t_param		param;
-	int			(*fractal)(t_pos, struct s_env *);
+	void		(*fractal)(struct s_env *, int (*color)(double, double));
 	t_complex	fractal_arg;
+	int			(*color)(double, double);
+	int			changed;
 }				t_env;
 
 /*   __  __ _   __  __
@@ -124,13 +125,12 @@ t_complex		set_complex_param(const char *s);
 void			parse_arg(t_env *env, int ac, char **av);
 
 // fractol_env.c
-t_env			*init_env(int ac, char **av);
+t_env			*init_fract_ol(int ac, char **av);
 void			exit_fractol(t_env *env);
 
 // fract_ol.c
-int				mandelbrot(t_pos position, t_env *env);
-int				julia(t_pos position, t_env *env);
-void			draw_fract_ol(t_env *env, int (*color)(double, double));
+void			julia(t_env *env, int (*color)(double, double));
+void			mandelbrot(t_env *env, int (*color)(double, double));
 
 /*   _  _  ___   ___  _  __
 	| || |/ _ \ / _ \| |/ /

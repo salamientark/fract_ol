@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 09:49:46 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/27 22:21:20 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 08:11:46 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,16 @@ static int	add_arg(t_env *env, const char *arg, int pos)
 	if (pos == 1)
 	{
 		env->param.max_iter = ft_atoi(arg);
-		return (10 <= env->param.max_iter && env->param.max_iter < 10000);
+		return (10 <= env->param.max_iter && env->param.max_iter <= 100);
 	}
 	if (pos == 2)
 	{
 		if (env->fractal == &mandelbrot)
 			return (0);
 		env->fractal_arg = set_complex_param(arg);
+		if (env->fractal_arg.reel < -1.0 || 1.0 < env->fractal_arg.reel
+				|| env->fractal_arg.img < -1.0 || 1.0 < env->fractal_arg.img)
+			return (0);
 		return (1);
 	}
 	return (0);
