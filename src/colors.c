@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:29:22 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 12:41:19 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:33:20 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,20 @@ int	multicolor_palet(double iter, double max_iter)
 	r = (int)(sin(2 * M_PI * t + 0) * 127 + 128);
 	g = (int)(sin(2 * M_PI * t + 2) * 127 + 128);
 	b = (int)(sin(2 * M_PI * t + 4) * 127 + 128);
+	return ((r << 16) | (g << 8) | b);
+}
+
+int	zoom_color(double iter, double max_iter)
+{
+	double	t;
+	int		r;
+	int		g;
+	int		b;
+
+	t = iter / max_iter;
+	max_iter = rescale(0, MAX_ITER_UP_LIMIT, max_iter) / 2;
+	r = (int)(sin(2 * M_PI * t + 0) * 127 * t + max_iter);
+	g = (int)(sin(2 * M_PI * t + 2) * 127 + max_iter);
+	b = (int)(sin(2 * M_PI * t + 4 * iter) * 127 + max_iter);
 	return ((r << 16) | (g << 8) | b);
 }

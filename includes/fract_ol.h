@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:59 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 12:42:33 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:23:03 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 */
 int				purlple_palet(double iter, double max_iter);
 int				multicolor_palet(double iter, double max_iter);
+int				zoom_color(double iter, double max_iter);
 
 /*   ___ _____	__  __   _ _____ _  _ 
 	| __|_   _|__|  \/  | /_\_   _| || |
@@ -127,7 +128,7 @@ void			parse_arg(t_env *env, int ac, char **av);
 
 // fractol_env.c
 t_env			*init_fract_ol(int ac, char **av);
-void			exit_fractol(t_env *env);
+int				exit_fractol(t_env *env);
 
 // fract_ol.c
 void			julia(t_env *env, int (*color)(double, double));

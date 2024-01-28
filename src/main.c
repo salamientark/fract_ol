@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:08:43 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/27 22:33:52 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/28 15:10:27 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(env->mlx, &render, env);
 	mlx_key_hook(env->window, &handle_key_hook, env);
 	mlx_mouse_hook(env->window, &handle_mouse_hook, env);
+	mlx_hook(env->window, 17, 0, &exit_fractol, env);
 	mlx_loop(env->mlx);
 	free(env->mlx);
 	free(env);
