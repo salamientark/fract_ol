@@ -13,15 +13,6 @@ SRC_FILE = $(SRC_DIR)/ft_math.c \
 			$(SRC_DIR)/hook.c $(SRC_DIR)/env.c	$(SRC_DIR)/fract_ol.c \
 			$(SRC_DIR)/main.c
 			   
-			  
-
-BONUS_DIR =
-BONUS_FILE = 
-
-# Development tools -> printing stuff
-TOOLS_DIR = tools
-TOOLS_FILE = $(TOOLS_DIR)/print_fract_ol.c
-
 ### HEADER FILE ###
 HEADER_DIR = includes
 
@@ -48,29 +39,20 @@ OBJ_SRC = $(addprefix $(SRC_DIR)/, $(addprefix $(OBJ_DIR)/, $(notdir $(SRC_FILE:
 ### RULES ###
 all : $(PROJECT)
 
+bonus : all
+
 $(PROJECT) : $(OBJ_SRC) $(OBJ_TOOLS)
 	make -C $(MLX_DIR)
 	make -C $(FT_DIR)
-	$(CC) -g3 $(CFLAGS) $(OBJ_SRC) -o $(PROJECT) $(FT_FLAG) $(MLX_FLAG) $(MATH_FLAG)
+	$(CC) $(CFLAGS) $(OBJ_SRC) -o $(PROJECT) $(FT_FLAG) $(MLX_FLAG) $(MATH_FLAG)
 
 $(SRC_DIR)/$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) -g3 $(CFLAGS) -I ./$(HEADER_DIR)  -c $< -o $@
-
-# bonus : $(OBJ_BONUS)
-# 	make -C $(FT_DIR)
-# 	$(CC) $(CFLAGS) $(OBJ_BONUS) -o checker $(FT_FLAG)
-
-# $(BONUS_DIR)/$(OBJ_DIR)/%.o : $(BONUS_DIR)/%.c
-# 	@mkdir -p $(@D)
-# 	$(CC) $(CFLAGS) -I $(BONUS_DIR) -c $< -o $@
-# 
-# %.o : %.c
-# 	$(CC) -g3 $(CFLAGS) -I $(HEADER_DIR) -c $< -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) -I ./$(HEADER_DIR)  -c $< -o $@
 
 fclean : clean
 	rm -f $(PROJECT)
-	@cd $(FT_DIR) && make fclean
+	make fclean -C $(FT_DIR)
 
 #Suppresion des fichiers objet
 clean :
@@ -78,6 +60,7 @@ clean :
 	@rm -df $(SRC_DIR)/$(OBJ_DIR)/
 	rm -f $(BONUS_DIR)/$(OBJ_DIR)/*.o
 	@rm -df $(BONUS_DIR)/$(OBJ_DIR)/
-	@cd $(FT_DIR) && make clean
+	make clean -C $(FT_DIR)
+	make clean -C $(MLX_DIR)
 
 re : fclean all

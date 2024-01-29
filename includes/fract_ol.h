@@ -6,7 +6,7 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:01:59 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 15:23:03 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/29 07:58:56 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define WINDOW_TITLE "Fract_ol"
 # define MAX_ITER_DOWN_LIMIT 10.
-# define MAX_ITER_UP_LIMIT 250.
+# define MAX_ITER_UP_LIMIT 255.
 
 /*
 	Complex numbers
@@ -86,6 +86,7 @@ typedef struct s_env
 	void		(*fractal)(struct s_env *, int (*color)(double, double));
 	t_complex	fractal_arg;
 	int			(*color)(double, double);
+	int			hud;
 }				t_env;
 
 /*   __  __ _   __  __
@@ -104,10 +105,10 @@ int				purlple_palet(double iter, double max_iter);
 int				multicolor_palet(double iter, double max_iter);
 int				zoom_color(double iter, double max_iter);
 
-/*   ___ _____	__  __   _ _____ _  _ 
+/*   ___ _____    __  __   _ _____ _  _ 
 	| __|_   _|__|  \/  | /_\_   _| || |
 	| _|  | ||___| |\/| |/ _ \| | | __ |
-	|_|   |_|	|_|  |_/_/ \_\_| |_||_|
+	|_|   |_|    |_|  |_/_/ \_\_| |_||_|
 */
 // math.c
 double			ft_abs(double n);

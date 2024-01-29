@@ -6,41 +6,48 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:49:27 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 15:12:37 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/29 07:57:48 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../includes/fract_ol.h"
+
+void	draw_hud(t_env *env)
+{
+	mlx_string_put(env->mlx, env->window, 41, 35, 0x00EB3467, "Control Keys:");
+	mlx_string_put(env->mlx, env->window, 37, 63, 0x00EB3467, "Move: ^ v < >");
+	mlx_string_put(env->mlx, env->window, 37, 83, 0x00EB3467, "Zoom: C and V");
+	mlx_string_put(env->mlx, env->window, 37, 103, 0x00EB3467, "Colors: 1 2 3");
+	mlx_string_put(env->mlx, env->window, 37, 123, 0x00EB3467, "HUD: H");
+}
 
 /*
 	Hook when key release
 */
 int	handle_key_hook(int keycode, void *param)
 {
-	t_env	*env_cp;
-
-	env_cp = (t_env *)param;
 	if (keycode == ARROW_RIGHT)
-		env_cp->param.ref.x += (20 * env_cp->param.step);
+		((t_env *)param)->param.ref.x += (20 * ((t_env *)param)->param.step);
 	if (keycode == ARROW_LEFT)
-		env_cp->param.ref.x -= (20 * env_cp->param.step);
+		((t_env *)param)->param.ref.x -= (20 * ((t_env *)param)->param.step);
 	if (keycode == ARROW_UP)
-		env_cp->param.ref.y -= (20 * env_cp->param.step);
+		((t_env *)param)->param.ref.y -= (20 * ((t_env *)param)->param.step);
 	if (keycode == ARROW_DOWN)
-		env_cp->param.ref.y += (20 * env_cp->param.step);
+		((t_env *)param)->param.ref.y += (20 * ((t_env *)param)->param.step);
 	if (keycode == V)
-	{
-		env_cp->param.step *= 0.9;
-		env_cp->param.step *= 0.9;
-	}
+		((t_env *)param)->param.step *= 0.9;
 	if (keycode == C)
-	{
-		env_cp->param.step *= 1.1;
-		env_cp->param.step *= 1.1;
-	}
+		((t_env *)param)->param.step *= 1.1;
+	if (keycode == H)
+		((t_env *)param)->hud *= -1;
+	if (keycode == ONE)
+		((t_env *)param)->color = &purlple_palet;
+	if (keycode == TWO)
+		((t_env *)param)->color = &multicolor_palet;
+	if (keycode == THREE)
+		((t_env *)param)->color = &zoom_color;
 	if (keycode == ESC)
-		return (exit_fractol(env_cp));
+		return (exit_fractol(((t_env *)param)));
 	return (0);
 }
 
@@ -77,7 +84,6 @@ int	handle_mouse_hook(int button, int x, int y, void *param)
 		zoom(env, x, y, 1.1);
 	if (button == MOUSE_SCROLL_DOWN)
 		zoom(env, x, y, 0.9);
-	printf("max_iter = %f\n", env->param.max_iter);
 	return (0);
 }
 
@@ -95,6 +101,8 @@ int	render(t_env *env)
 		return (exit_fractol(env));
 	env->fractal(env, env->color);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.img, 0, 0);
+	if (env->hud == 1)
+		draw_hud(env);
 	mlx_destroy_image(env->mlx, env->img.img);
 	return (1);
 }

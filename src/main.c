@@ -6,12 +6,11 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:08:43 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 15:10:27 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/29 07:57:52 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
-#include <stdio.h>
 
 int	main(int ac, char **av)
 {

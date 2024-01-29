@@ -6,14 +6,12 @@
 /*   By: dbaladro <dbaladro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:14:11 by dbaladro          #+#    #+#             */
-/*   Updated: 2024/01/28 09:31:12 by dbaladro         ###   ########.fr       */
+/*   Updated: 2024/01/29 07:58:17 by dbaladro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_FRACT_OL_H
 # define ERROR_FRACT_OL_H
-
-# include <string.h>
 
 # define FRACTOL_OPT "usage: fract_ol [fractal] [max_iteration] [complex]\n\
  fractal:\n\
